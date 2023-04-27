@@ -7,6 +7,7 @@
 #include "SwapChain.hpp"
 #include "ImageView.hpp"
 #include "GraphicsPipeline.hpp"
+#include "RenderPass.hpp"
 
 class RayTracingApplication {
 private:
@@ -17,6 +18,7 @@ private:
     Device device;
     SwapChain swapChain;
     ImageView imageView;
+    RenderPass renderPass;
     GraphicsPipeline pipeline;
 
     void loop();

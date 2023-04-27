@@ -1,6 +1,5 @@
 #include "Application.hpp"
 
-
 void RayTracingApplication::run() {
     window = Window(800, 800);
     instance = VulkanInstance(&window, validationLayers);
@@ -9,6 +8,7 @@ void RayTracingApplication::run() {
     device = Device(&instance, &surface);
     swapChain = SwapChain(&device, &window, &surface);
     imageView = ImageView(&device, &swapChain);
+    renderPass = RenderPass(&device, &swapChain);
     pipeline = GraphicsPipeline(&device);
 
     loop();

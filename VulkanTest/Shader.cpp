@@ -2,7 +2,7 @@
 
 Shader::Shader(const std::string& filename, Device* _device) {
     auto shaderCode = readFile(filename);
-    createShaderModule(shaderCode, _device->device);
+    shaderModule = createShaderModule(shaderCode, _device->device);
 
     std::cout << "Loaded shader: " << filename << std::endl;
 }
@@ -39,4 +39,14 @@ VkShaderModule Shader::createShaderModule(const std::vector<char>& code, VkDevic
 
 
     return shaderModule;
+}
+
+VkPipelineShaderStageCreateInfo Shader::createShaderStage(VkShaderStageFlagBits stage) {
+    VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
+    vertShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+    vertShaderStageInfo.stage = stage;
+    vertShaderStageInfo.module = shaderModule;
+    vertShaderStageInfo.pName = "main";
+
+    return vertShaderStageInfo;
 }
