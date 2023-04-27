@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Device.hpp"
 #include "SwapChain.hpp"
 class RenderPass {

@@ -13,7 +13,7 @@
 
 #include "GraphicsPipeline.hpp"
 
-GraphicsPipeline::GraphicsPipeline(Device* _device) {
+GraphicsPipeline::GraphicsPipeline(Device* _device, RenderPass* _renderPass) {
 	Shader rayGenShader = Shader("vert.spv", _device);
 	Shader fragShader = Shader("frag.spv", _device);
 
@@ -94,6 +94,29 @@ GraphicsPipeline::GraphicsPipeline(Device* _device) {
 	if (vkCreatePipelineLayout(_device->device, &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS) {
 		throw std::runtime_error("failed to create pipeline layout!");
 	}
+
+    std::cout << "Finished creating graphics pipeline layout." << std::endl;
+
+
+    VkGraphicsPipelineCreateInfo pipelineInfo{};
+    pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+    pipelineInfo.stageCount = 2;
+    pipelineInfo.pStages = shaderStages;
+    pipelineInfo.pVertexInputState = &vertexInputInfo;
+    pipelineInfo.pInputAssemblyState = &inputAssembly;
+    pipelineInfo.pViewportState = &viewportState;
+    pipelineInfo.pRasterizationState = &rasterizer;
+    pipelineInfo.pMultisampleState = &multisampling;
+    pipelineInfo.pColorBlendState = &colorBlending;
+    pipelineInfo.pDynamicState = &dynamicState;
+    pipelineInfo.layout = pipelineLayout;
+    pipelineInfo.renderPass = _renderPass->renderPass;
+    pipelineInfo.subpass = 0;
+    pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
+
+    if (vkCreateGraphicsPipelines(_device->device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS) {
+        throw std::runtime_error("failed to create graphics pipeline!");
+    }
 
 	vkDestroyShaderModule(_device->device, rayGenShader.shaderModule, nullptr);
 	vkDestroyShaderModule(_device->device, fragShader.shaderModule, nullptr);
