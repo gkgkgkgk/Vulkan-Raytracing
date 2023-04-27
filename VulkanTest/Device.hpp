@@ -1,3 +1,4 @@
+#pragma once
 #include <vulkan/vulkan.h>
 #include "Instance.hpp"
 #include "QueueFamilyIndices.hpp"
@@ -10,9 +11,10 @@ class Device {
 public:
 	Device() {};
 	Device(VulkanInstance* _instance, Surface* surface);
-private:
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 	VkDevice device;
+
+private:
 	VkQueue graphicsQueue;
 	VkQueue presentQueue;
 

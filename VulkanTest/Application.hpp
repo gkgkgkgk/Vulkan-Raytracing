@@ -4,6 +4,8 @@
 #include "Surface.hpp"
 #include "Device.hpp"
 #include "ValidationLayers.hpp"
+#include "SwapChain.hpp"
+#include "ImageView.hpp"
 
 class RayTracingApplication {
 private:
@@ -12,6 +14,8 @@ private:
     DebugMessenger debugMessenger;
     Surface surface;
     Device device;
+    SwapChain swapChain;
+    ImageView imageView;
 
     void loop();
 

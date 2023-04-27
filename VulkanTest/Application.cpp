@@ -7,6 +7,8 @@ void RayTracingApplication::run() {
     debugMessenger = DebugMessenger(&instance);
     surface = Surface(&instance, &window);
     device = Device(&instance, &surface);
+    swapChain = SwapChain(&device, &window, &surface);
+    imageView = ImageView(&device, &swapChain);
 
     loop();
 }

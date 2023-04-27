@@ -139,10 +139,12 @@
     <ClCompile Include="DebugMessenger.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Extensions.cpp" />
+    <ClCompile Include="ImageView.cpp" />
     <ClCompile Include="Instance.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="QueueFamilyIndices.cpp" />
     <ClCompile Include="Surface.cpp" />
+    <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="ValidationLayers.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -151,9 +153,11 @@
     <ClInclude Include="DebugMessenger.hpp" />
     <ClInclude Include="Device.hpp" />
     <ClInclude Include="Extensions.hpp" />
+    <ClInclude Include="ImageView.hpp" />
     <ClInclude Include="Instance.hpp" />
     <ClInclude Include="QueueFamilyIndices.hpp" />
     <ClInclude Include="Surface.hpp" />
+    <ClInclude Include="SwapChain.hpp" />
     <ClInclude Include="ValidationLayers.hpp" />
     <ClInclude Include="Window.hpp" />
   </ItemGroup>
