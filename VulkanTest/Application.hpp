@@ -6,6 +6,7 @@
 #include "ValidationLayers.hpp"
 #include "SwapChain.hpp"
 #include "ImageView.hpp"
+#include "GraphicsPipeline.hpp"
 
 class RayTracingApplication {
 private:
@@ -16,6 +17,7 @@ private:
     Device device;
     SwapChain swapChain;
     ImageView imageView;
+    GraphicsPipeline pipeline;
 
     void loop();
 
