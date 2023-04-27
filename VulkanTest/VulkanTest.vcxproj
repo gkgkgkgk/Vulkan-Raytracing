@@ -139,6 +139,7 @@
     <ClCompile Include="DebugMessenger.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Extensions.cpp" />
+    <ClCompile Include="GraphicsPipeline.cpp" />
     <ClCompile Include="ImageView.cpp" />
     <ClCompile Include="Instance.cpp" />
     <ClCompile Include="main.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="DebugMessenger.hpp" />
     <ClInclude Include="Device.hpp" />
     <ClInclude Include="Extensions.hpp" />
+    <ClInclude Include="GraphicsPipeline.hpp" />
     <ClInclude Include="ImageView.hpp" />
     <ClInclude Include="Instance.hpp" />
     <ClInclude Include="QueueFamilyIndices.hpp" />
