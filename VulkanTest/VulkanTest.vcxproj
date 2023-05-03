@@ -146,9 +146,12 @@ echo "Built Shaders..."</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="CommandBuffer.cpp" />
     <ClCompile Include="CommandPool.cpp" />
     <ClCompile Include="DebugMessenger.cpp" />
+    <ClCompile Include="DescriptorPool.cpp" />
+    <ClCompile Include="DescriptorSetLayout.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Extensions.cpp" />
     <ClCompile Include="Fence.cpp" />
@@ -163,14 +166,18 @@ echo "Built Shaders..."</Command>
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="UniformBuffer.cpp" />
     <ClCompile Include="ValidationLayers.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp" />
+    <ClInclude Include="Buffer.hpp" />
     <ClInclude Include="CommandBuffer.hpp" />
     <ClInclude Include="CommandPool.hpp" />
     <ClInclude Include="DebugMessenger.hpp" />
+    <ClInclude Include="DescriptorPool.hpp" />
+    <ClInclude Include="DescriptorSetlayout.hpp" />
     <ClInclude Include="Device.hpp" />
     <ClInclude Include="Extensions.hpp" />
     <ClInclude Include="Fence.hpp" />
@@ -184,7 +191,9 @@ echo "Built Shaders..."</Command>
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Surface.hpp" />
     <ClInclude Include="SwapChain.hpp" />
+    <ClInclude Include="UniformBuffer.hpp" />
     <ClInclude Include="ValidationLayers.hpp" />
+    <ClInclude Include="Vertex.hpp" />
     <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <ItemGroup>

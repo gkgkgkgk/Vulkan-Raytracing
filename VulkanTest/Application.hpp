@@ -13,6 +13,10 @@
 #include "CommandBuffer.hpp"
 #include "Semaphore.hpp"
 #include "Fence.hpp"
+#include "Buffer.hpp"
+#include "DescriptorSetlayout.hpp"
+#include "UniformBuffer.hpp"
+#include "DescriptorPool.hpp"
 
 class RayTracingApplication {
 private:
@@ -30,6 +34,11 @@ private:
     CommandBuffer commandBuffer;
     Semaphore semaphore;
     Fence fence;
+    Buffer vertexBuffer;
+    Buffer indexBuffer;
+    DescriptorSetLayout descriptorSetLayout;
+    UniformBuffer uniformBuffer;
+    DescriptorPool descriptorPool;
     uint32_t currentFrame = 0;
     int max_frames_in_flight = 2;
 

@@ -9,9 +9,30 @@ void RayTracingApplication::run() {
     swapChain = SwapChain(&device, &window, &surface);
     imageView = ImageView(&device, &swapChain);
     renderPass = RenderPass(&device, &swapChain);
-    pipeline = GraphicsPipeline(&device, &renderPass);
+    descriptorSetLayout = DescriptorSetLayout(&device);
+    pipeline = GraphicsPipeline(&device, &renderPass, &descriptorSetLayout);
     frameBuffer = FrameBuffer(&device, &imageView, &renderPass, &swapChain);
     commandPool = CommandPool(&device, &surface);
+
+    const std::vector<Vertex> vertices = {
+    {{-0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}},
+    {{0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
+    {{0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}},
+    {{-0.5f, 0.5f}, {1.0f, 1.0f, 1.0f}}
+    };
+
+    const std::vector<uint16_t> indices = {
+    0, 1, 2, 2, 3, 0
+    };
+
+    vertexBuffer = Buffer(&device);
+    vertexBuffer.createVertexBuffer(vertices, &commandPool);
+ 
+    indexBuffer = Buffer(&device);
+    indexBuffer.createIndexBuffer(indices, &commandPool);
+
+    uniformBuffer = UniformBuffer(&device, &commandPool, max_frames_in_flight);
+    descriptorPool = DescriptorPool(&device, &descriptorSetLayout, &uniformBuffer, max_frames_in_flight);
     commandBuffer = CommandBuffer(&commandPool, &device, max_frames_in_flight);
     semaphore = Semaphore(&device, max_frames_in_flight);
     fence = Fence(&device, max_frames_in_flight);
@@ -22,13 +43,15 @@ void RayTracingApplication::run() {
 
 void RayTracingApplication::drawFrame() {
     vkWaitForFences(device.device, 1, &fence.inFlightFences[currentFrame], VK_TRUE, UINT64_MAX);
+    uniformBuffer.update(&swapChain, currentFrame);
+
     vkResetFences(device.device, 1, &fence.inFlightFences[currentFrame]);
 
     uint32_t imageIndex;
     vkAcquireNextImageKHR(device.device, swapChain.swapChain, UINT64_MAX, semaphore.imageAvailableSemaphores[currentFrame], VK_NULL_HANDLE, &imageIndex);
     
     vkResetCommandBuffer(commandBuffer.commandBuffers[currentFrame], /*VkCommandBufferResetFlagBits*/ 0);
-    commandBuffer.recordCommandBuffer(renderPass, frameBuffer, swapChain, pipeline, imageIndex, currentFrame);
+    commandBuffer.recordCommandBuffer(renderPass, frameBuffer, swapChain, pipeline, vertexBuffer, indexBuffer, descriptorPool, imageIndex, currentFrame);
 
     VkSubmitInfo submitInfo{};
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;

@@ -7,12 +7,13 @@
 #include "Shader.hpp"
 #include "Device.hpp"
 #include "RenderPass.hpp"
+#include "Vertex.hpp"
+#include "DescriptorSetlayout.hpp"
+
 class GraphicsPipeline {
 public:
 	GraphicsPipeline() {};
-	GraphicsPipeline(Device* _device, RenderPass* _renderPass);
+	GraphicsPipeline(Device* _device, RenderPass* _renderPass, DescriptorSetLayout* _descriptorSetLayout);
 	VkPipeline graphicsPipeline;
-
-private:
 	VkPipelineLayout pipelineLayout;
 };

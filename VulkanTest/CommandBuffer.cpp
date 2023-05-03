@@ -15,7 +15,7 @@ CommandBuffer::CommandBuffer(CommandPool* _commandPool, Device* _device, int max
 	}
 }
 
-void CommandBuffer::recordCommandBuffer(RenderPass &renderPass, FrameBuffer &frameBuffer, SwapChain &swapChain, GraphicsPipeline &pipeline, uint32_t imageIndex, int currentFrame) {
+void CommandBuffer::recordCommandBuffer(RenderPass &renderPass, FrameBuffer &frameBuffer, SwapChain &swapChain, GraphicsPipeline &pipeline, Buffer& vertexBuffer, Buffer& indexBuffer, DescriptorPool &descriptorPool, uint32_t imageIndex, int currentFrame) {
 	VkCommandBufferBeginInfo beginInfo{};
 	beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
 
@@ -52,7 +52,12 @@ void CommandBuffer::recordCommandBuffer(RenderPass &renderPass, FrameBuffer &fra
     scissor.extent = swapChain.swapChainExtent;
     vkCmdSetScissor(commandBuffers[currentFrame], 0, 1, &scissor);
 
-    vkCmdDraw(commandBuffers[currentFrame], 3, 1, 0, 0);
+    VkBuffer vertexBuffers[] = { vertexBuffer.buffer };
+    VkDeviceSize offsets[] = { 0 };
+    vkCmdBindVertexBuffers(commandBuffers[currentFrame], 0, 1, vertexBuffers, offsets);
+    vkCmdBindIndexBuffer(commandBuffers[currentFrame], indexBuffer.buffer, 0, VK_INDEX_TYPE_UINT16);
+    vkCmdBindDescriptorSets(commandBuffers[currentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline.pipelineLayout, 0, 1, &descriptorPool.descriptorSets[currentFrame], 0, nullptr);
+    vkCmdDrawIndexed(commandBuffers[currentFrame], indexBuffer.size, 1, 0, 0, 0);
 
     vkCmdEndRenderPass(commandBuffers[currentFrame]);
 
