@@ -13,10 +13,10 @@ public:
 	Device(VulkanInstance* _instance, Surface* surface);
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 	VkDevice device;
+	VkQueue presentQueue;
+	VkQueue graphicsQueue;
 
 private:
-	VkQueue graphicsQueue;
-	VkQueue presentQueue;
 
 	void pickPhysicalDevice(VulkanInstance* _instance);
 	bool isDiscreteGPU(VkPhysicalDevice device);

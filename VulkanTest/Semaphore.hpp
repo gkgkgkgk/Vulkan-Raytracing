@@ -5,7 +5,7 @@
 class Semaphore {
 public:
 	Semaphore() {};
-	Semaphore(Device* _device);
-	VkSemaphore imageAvailableSemaphore;
-	VkSemaphore renderFinishedSemaphore;
+	Semaphore(Device* _device, int max_frames_in_flight);
+	std::vector<VkSemaphore> imageAvailableSemaphores;
+	std::vector<VkSemaphore> renderFinishedSemaphores;
 };

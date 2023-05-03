@@ -5,8 +5,8 @@
 class Fence {
 public:
 	Fence() {};
-	Fence(Device* _device);
-	VkFence inFlightFence;
+	Fence(Device* _device, int max_frames_in_flight);
+	std::vector<VkFence> inFlightFences;
 private:
 	VkFenceCreateInfo fenceInfo{};
 };

@@ -30,9 +30,10 @@ private:
     CommandBuffer commandBuffer;
     Semaphore semaphore;
     Fence fence;
+    uint32_t currentFrame = 0;
+    int max_frames_in_flight = 2;
 
     void loop();
-    void render(const uint32_t imageIndex);
     void drawFrame();
 
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) {
